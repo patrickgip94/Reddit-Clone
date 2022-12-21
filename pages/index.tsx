@@ -5,8 +5,11 @@ import CreatePost from "../components/feed/CreatePost";
 import SortPost from "../components/feed/SortPost";
 import About from "../components/community/About";
 import Feed from "../components/feed";
+import Login from "../components/Login";
+import { RedditContext } from "../context/RedditContext";
 import useSWR from "swr";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { supabase } from "../services/supabaseClient";
 
 const style = {
   wrapper: `flex min-h-screen flex-col bg-black text-white`,
@@ -16,9 +19,12 @@ const style = {
 };
 
 const Home: NextPage = () => {
+  const { currentUser } = useContext(RedditContext);
+
   const [myPosts, setMyPosts] = useState([]);
 
-  const fetcher = (arg: any, ...args: any) => fetch(arg, ...args).then((res) => res.json());
+  const fetcher = (arg: any, ...args: any) =>
+    fetch(arg, ...args).then((res) => res.json());
 
   const { data, error } = useSWR("/api/get-posts", fetcher, {
     refreshInterval: 200,
@@ -26,12 +32,34 @@ const Home: NextPage = () => {
 
   console.log(data);
 
+  // update or insert a new user
+  const saveAndUpdateUser = async () => {
+    if (!currentUser) return;
+
+    await supabase.from("users").upsert(
+      {
+        email: currentUser.user_metadata.email,
+        name: currentUser.user_metadata.full_name,
+        profileImage: currentUser.user_metadata.avatar_url,
+      },
+      { onConflict: "email" }
+    );
+  };
+
   useEffect(() => {
     if (!data) return;
 
     setMyPosts(data.data);
   }, [data]);
 
+  useEffect(() => {
+    saveAndUpdateUser();
+  }, [currentUser]);
+
+  return <>{currentUser ? <HomePage myPosts={myPosts} /> : <Login />}</>;
+};
+
+const HomePage = ({ myPosts }) => {
   return (
     <div className={style.wrapper}>
       <Header />
