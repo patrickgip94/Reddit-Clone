@@ -1,3 +1,4 @@
+import { CakeIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 
 const style = {
@@ -11,8 +12,9 @@ const style = {
   stat: "flex flex-col",
   statTitle: "text-xs",
   footer: "flex flex-col space-y-4 pt-2",
-  createdAt: "text-sm font-light",
-  joinedButton: "cursor-pointer rounded-full border border-gray-300 py-1 text-center text-sm font-semibold",
+  createdAt: "text-sm font-light flex items-center py-2 px-2",
+  joinedButton:
+    "cursor-pointer rounded-full border border-gray-300 py-1 text-center text-sm font-semibold",
 };
 
 const About = () => {
@@ -32,23 +34,29 @@ const About = () => {
         </div>
         <p className={style.aboutContent}>
           A community for learning and developing web application using React by
-          Meta
+          Meta.
         </p>
 
         <div className={style.statsWrapper}>
           <div className={style.stat}>
-            <span>329k</span>
-            <span className={style.statTitle}>Members</span>
+            <span className="font-semibold">329k</span>
+            <span className={style.statTitle}>React Devs</span>
           </div>
           <div className={style.stat}>
-            <span>412</span>
+            <span className="items-center">
+              <span className="text-xl items-center px-1 text-[#00FF00]">•</span>
+              <span className="font-semibold">453</span>
+            </span>
             <span className={style.statTitle}>Online</span>
           </div>
         </div>
       </div>
 
       <div className={style.footer}>
-        <p className={style.createdAt}>Created Dec 31, 2013 </p>
+        <p className={style.createdAt}>
+          <CakeIcon className="h-6 w-6" />
+          <span className="px-4 font-semibold">Created Dec 31, 2013</span>
+        </p>
         <div className={style.joinedButton}>Joined</div>
       </div>
     </div>

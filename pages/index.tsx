@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Header from "../components/header";
 import Banner from "../components/community/Banner";
 import CreatePost from "../components/feed/CreatePost";
+import SortPost from "../components/feed/SortPost";
 import About from "../components/community/About";
 import Feed from "../components/feed";
 import useSWR from "swr";
@@ -17,21 +18,20 @@ const style = {
 const Home: NextPage = () => {
   const [myPosts, setMyPosts] = useState([]);
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (arg: any, ...args: any) => fetch(arg, ...args).then((res) => res.json());
 
   const { data, error } = useSWR("/api/get-posts", fetcher, {
     refreshInterval: 200,
   });
-  
-  console.log(data)
+
+  console.log(data);
 
   useEffect(() => {
-    if (!data) return
+    if (!data) return;
 
-    setMyPosts(data.data)
-  }, [data])
+    setMyPosts(data.data);
+  }, [data]);
 
-  
   return (
     <div className={style.wrapper}>
       <Header />
@@ -39,6 +39,7 @@ const Home: NextPage = () => {
       <main className={style.main}>
         <div className={style.content}>
           <CreatePost />
+          <SortPost />
           <Feed posts={myPosts} />
         </div>
         <div className={style.infoContainer}>
