@@ -33,7 +33,7 @@ const Banner = () => {
             <div className={style.profilePicWrapper}>
               <Image
                 className={style.profilePic}
-                src="https://styles.redditmedia.com/t5_2zldd/styles/communityIcon_fbblpo38vy941.png?width=256&s=13a87a036836ce95570a76feb53f27e61717ad1b"
+                src="https://i.imgur.com/fGqFf23.png"
                 layout="fill"
                 alt=""
               />

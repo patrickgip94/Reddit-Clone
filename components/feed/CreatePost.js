@@ -17,7 +17,7 @@ const CreatePost = () => {
     <div className={style.wrapper}>
       <CreatePostIcon />
 
-      <div>
+      <div className={style.redirectContainer}>
         <Link href={`/new`}>
           <a className={style.redirectButton}>Create Post</a>
         </Link>

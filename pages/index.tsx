@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import Header from "../components/header";
 import Banner from "../components/community/Banner";
 import CreatePost from "../components/feed/CreatePost";
+import About from "../components/community/About";
+import Feed from "../components/feed";
 
 const style = {
   wrapper: `flex min-h-screen flex-col bg-black text-white`,
@@ -18,8 +20,11 @@ const Home: NextPage = () => {
       <main className={style.main}>
         <div className={style.content}>
           <CreatePost />
+          <Feed />
         </div>
-        <div className={style.infoContainer}>{/* <About /> */}</div>
+        <div className={style.infoContainer}>
+          <About />
+        </div>
       </main>
     </div>
   );
