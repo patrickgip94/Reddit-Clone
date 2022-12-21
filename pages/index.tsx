@@ -4,6 +4,8 @@ import Banner from "../components/community/Banner";
 import CreatePost from "../components/feed/CreatePost";
 import About from "../components/community/About";
 import Feed from "../components/feed";
+import useSWR from "swr";
+import { useEffect, useState } from "react";
 
 const style = {
   wrapper: `flex min-h-screen flex-col bg-black text-white`,
@@ -13,6 +15,23 @@ const style = {
 };
 
 const Home: NextPage = () => {
+  const [myPosts, setMyPosts] = useState([]);
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+  const { data, error } = useSWR("/api/get-posts", fetcher, {
+    refreshInterval: 200,
+  });
+  
+  console.log(data)
+
+  useEffect(() => {
+    if (!data) return
+
+    setMyPosts(data.data)
+  }, [data])
+
+  
   return (
     <div className={style.wrapper}>
       <Header />
@@ -20,7 +39,7 @@ const Home: NextPage = () => {
       <main className={style.main}>
         <div className={style.content}>
           <CreatePost />
-          <Feed />
+          <Feed posts={myPosts} />
         </div>
         <div className={style.infoContainer}>
           <About />
