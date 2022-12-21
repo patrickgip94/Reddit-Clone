@@ -6,18 +6,15 @@ const style = {
   votes: "py-1 text-xs font-bold text-white",
 };
 
-const Vote = () => {
-  const upvotes = 10;
-  const downvote = 5;
+const Vote = ({upvotes, downvotes}) => {
 
-  
   return (
     <div className={style.wrapper}>
       <button>
         <UpvoteIcon />
       </button>
 
-      <p className={style.votes}>{upvotes - downvote}</p>
+      <p className={style.votes}>{upvotes - downvotes}</p>
 
       <button>
         <DownvoteIcon />
