@@ -9,13 +9,13 @@ const style = {
   postContent: "text-md font-medium text-[#D7DADC]/80",
 };
 
-const Post = () => {
+const Post = ({ id, title, author }) => {
   return (
     <div className={style.wrapper}>
       <Vote />
       <div className={style.post}>
-        <Info />
-        <h1 className={style.postTitle}>What is ReactJS?</h1>
+        <Info author={author} />
+        <h1 className={style.postTitle}>{title}</h1>
         <p className={style.postContent}>
           React is a free and open-source front-end JavaScript library for
           building user interfaces based on UI components. It is maintained by

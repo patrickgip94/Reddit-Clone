@@ -6,7 +6,7 @@ const style = {
   postedBy: "flex items-center space-x-1",
 };
 
-const Info = () => {
+const Info = ({ author }) => {
   return (
     <div className={style.wrapper}>
       <div className={style.profilePicContainer}>
@@ -24,7 +24,7 @@ const Info = () => {
       <div className={style.postedBy}>
         <span>
           Posted by{" "}
-          <span className="cursor-pointer hover:underline">u/TofuSoupz</span>
+          <span className="cursor-pointer hover:underline">u/{author}</span>
         </span>
         <span> 2 hours ago</span>
       </div>
