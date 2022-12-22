@@ -29,7 +29,7 @@ const PostView = () => {
           <Post {...selectedPost} />
           {/* Save Comment - ability to add new comment */}
           {/* Comments - show all exisiting comments */}
-          <Comments postId={selectedPost}/>
+          <Comments postId={selectedPost} />
         </div>
       </div>
     </div>
