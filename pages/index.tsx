@@ -19,12 +19,9 @@ const style = {
 };
 
 const Home: NextPage = () => {
-  const { currentUser } = useContext(RedditContext);
+  const { currentUser, fetcher } = useContext(RedditContext);
 
   const [myPosts, setMyPosts] = useState([]);
-
-  const fetcher = (arg: any, ...args: any) =>
-    fetch(arg, ...args).then((res) => res.json());
 
   const { data, error } = useSWR("/api/get-posts", fetcher, {
     refreshInterval: 200,
@@ -56,7 +53,7 @@ const Home: NextPage = () => {
     saveAndUpdateUser();
   }, [currentUser]);
 
-  return <>{currentUser ? <HomePage myPosts={myPosts} /> : <Login />}</>;
+  return <div>{currentUser ? <HomePage myPosts={myPosts} /> : <Login />}</div>;
 };
 
 const HomePage = ({ myPosts }) => {

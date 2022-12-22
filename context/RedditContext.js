@@ -7,6 +7,8 @@ export const RedditProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
 
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
   useEffect(() => {
     const { user } = supabase.auth.getSession() || { user: null };
     setCurrentUser(user);
@@ -20,7 +22,7 @@ export const RedditProvider = ({ children }) => {
 
   return (
     <RedditContext.Provider
-      value={{ currentUser, selectedPost, setSelectedPost }}
+      value={{ currentUser, selectedPost, setSelectedPost, fetcher }}
     >
       {children}
     </RedditContext.Provider>

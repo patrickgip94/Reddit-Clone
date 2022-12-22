@@ -11,8 +11,8 @@ const style = {
 
 const Login = () => {
   useEffect(() => {
-    const { user } = supabase.auth.getSession() || { user: null };
-    console.log(user);
+    const { users } = supabase.auth.getSession();
+    console.log(users);
   }, []);
 
   const signInWithGoogle = async () => {
